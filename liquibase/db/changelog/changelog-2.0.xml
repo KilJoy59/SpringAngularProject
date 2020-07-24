@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20200702-00" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="STUDENT_ID_SEQ" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="STUDENT_ID_SEQ" dataType="int" schemaName="public"/>
+        <rollback>
+            <dropSequence sequenceName="STUDENT_ID_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-01" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="STUDENT" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 1. Liquibase Создание таблицы STUDENT</comment>
+        <sql>
+            create table STUDENT (
+            id serial primary key,
+            idd int not null,
+            first_name varchar(50),
+            middle_name varchar(50),
+            last_name varchar(50),
+            passport varchar(15),
+            birth_date timestamp(0),
+            create_date timestamp(0) not null,
+            delete_date timestamp(0),
+            status varchar(10),
+            to_be_deleted boolean
+            );
+        </sql>
+        <rollback>
+            <sql>
+                drop table STUDENT;
+            </sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-02" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="STUDENT" schemaName="public"/>
+                <columnExists tableName="STUDENT" columnName="to_be_deleted"/>
+            </and>
+        </preConditions>
+        <comment>Lesson1. Liquibase Доп колонка для таблицы STUDENT</comment>
+        <sql>
+            alter table STUDENT drop column to_be_deleted;
+        </sql>
+        <rollback>
+            alter table STUDENT add column to_be_deleted boolean;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200702-03" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="TEACHER_ID_SEQ" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="TEACHER_ID_SEQ" dataType="int" schemaName="public"/>
+        <rollback>
+            <dropSequence sequenceName="TEACHER_ID_SEQ"/>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet id="20200620-04" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TEACHER" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 1. Liquibase Создание таблицы TEACHER</comment>
+        <sql>
+            create table TEACHER (
+            id serial primary key,
+            idd int not null,
+            first_name varchar(50),
+            middle_name varchar(50),
+            last_name varchar(50),
+            passport varchar(15),
+            birth_date timestamp(0),
+            create_date timestamp(0) not null,
+            delete_date timestamp(0),
+            status varchar(10),
+            to_be_deleted boolean
+            );
+        </sql>
+        <rollback>
+            drop table TEACHER;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-05" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="TEACHER" schemaName="public"/>
+                <columnExists tableName="TEACHER" columnName="to_be_deleted"/>
+            </and>
+        </preConditions>
+        <comment>Lesson1. Liquibase Доп колонка для таблицы TEACHER</comment>
+        <sql>
+            alter table TEACHER drop column to_be_deleted;
+        </sql>
+        <rollback>
+            alter table TEACHER add column to_be_deleted boolean;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200702-06" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="COURSE_ID_SEQ" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="COURSE_ID_SEQ" dataType="int" schemaName="public"/>
+        <rollback>
+            <dropSequence sequenceName="COURSE_ID_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-07" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="COURSE"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 1. Liquibase Создание таблицы COURSE</comment>
+        <sql>
+            create table COURSE (
+            id serial primary key,
+            idd int not null,
+            name varchar(100),
+            description varchar(500),
+            teacher_idd int,
+            start_date timestamp(0),
+            end_date timestamp(0),
+            create_date timestamp(0) not null,
+            delete_date timestamp(0),
+            status varchar(10),
+            max_count_student int,
+            to_be_deleted boolean
+            );
+        </sql>
+        <rollback>
+            drop table COURSE;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-08" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="COURSE" schemaName="public"/>
+                <columnExists tableName="COURSE" columnName="to_be_deleted"/>
+            </and>
+        </preConditions>
+        <comment>Lesson1. Liquibase Доп колонка для таблицы COURSE</comment>
+        <sql>
+            alter table COURSE drop column to_be_deleted;
+        </sql>
+        <rollback>
+            alter table COURSE add column to_be_deleted boolean;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200702-09" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="STUDENT_TO_COURSE_ID_SEQ" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="STUDENT_TO_COURSE_ID_SEQ" dataType="int" schemaName="public"/>
+        <rollback>
+            <dropSequence sequenceName="STUDENT_TO_COURSE_ID_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-10" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="STUDENT_TO_COURSE"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 1. Liquibase Создание таблицы STUDENT_TO_COURSE</comment>
+        <sql>
+            create table STUDENT_TO_COURSE (
+            id serial primary key,
+            student_idd int,
+            course_idd int,
+            success boolean
+            );
+        </sql>
+        <rollback>
+            drop table STUDENT_TO_COURSE;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200702-11" author="ponamarchuk">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="LESSON_ID_SEQ" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="LESSON_ID_SEQ" dataType="int" schemaName="public"/>
+        <rollback>
+            <dropSequence sequenceName="LESSON_ID_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-12" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="LESSON"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 1. Liquibase Создание таблицы LESSON</comment>
+        <sql>
+            create table LESSON (
+            id serial primary key,
+            name varchar(100),
+            description varchar(1000),
+            course_idd int,
+            room_idd int,
+            lesson_date_start timestamp(0),
+            lesson_date_end timestamp(0),
+            extra_instruments varchar(1000),
+            to_be_deleted boolean
+            );
+        </sql>
+        <rollback>
+            drop table LESSON;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-13" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="LESSON" schemaName="public"/>
+                <columnExists tableName="LESSON" columnName="to_be_deleted"/>
+            </and>
+        </preConditions>
+        <comment>Lesson1. Liquibase Доп колонка для таблицы LESSON</comment>
+        <sql>
+            alter table LESSON drop column to_be_deleted;
+        </sql>
+        <rollback>
+            alter table LESSON add column to_be_deleted boolean;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200702-14" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="LESSON_TO_INSTRUMENT_ID_SEQ" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="LESSON_TO_INSTRUMENT_ID_SEQ" dataType="int" schemaName="public"/>
+        <rollback>
+            <dropSequence sequenceName="LESSON_TO_INSTRUMENT_ID_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200620-15" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="LESSON_TO_INSTRUMENT"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 1. Liquibase Создание таблицы LESSON_TO_INSTRUMENT</comment>
+        <sql>
+            create table LESSON_TO_INSTRUMENT (
+            id serial primary key,
+            lesson_id int,
+            instrument_idd int
+            );
+        </sql>
+        <rollback>
+            drop table LESSON_TO_INSTRUMENT;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20200713-16" author="abrakov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="APP_USER" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Lesson 9. Liquibase. Создание таблицы APP_USER</comment>
+        <sql>
+            create table APP_USER (
+            id serial primary key,
+            login varchar(50),
+            password_hash varchar(50),
+            fio varchar(255),
+            is_active boolean,
+            last_login_date timestamp(0)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                drop table APP_USER;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

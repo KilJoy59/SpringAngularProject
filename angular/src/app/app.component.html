@@ -1,0 +1,37 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <div class="toolbar" role="banner">
+        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+        <img height="90" width="90" alt="Региональный Институт Непрерывного образования" src="../assets/rino.png"/>
+        <div class="spacer"></div>
+        <span>Учебный проект Spring - Angular</span>
+        <div class="spacer"></div>
+
+        <a aria-label="Digital Future Systems" target="_blank" rel="noopener" href="http://dfsystems.ru/"
+           title="DFSystems">
+          <img height="90" width="120" alt="Digital Future Systems" src="../assets/dfs.png"/></a>
+      </div>
+      <div class="content" role="main">
+        <router-outlet></router-outlet>
+
+        <footer>
+          2020&nbsp;
+          <a href="https://github.com/npolovnikov/spring-angular-project" target="_blank"> GitHub </a>
+        </footer>
+      </div>
+
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Toolbar -->
+
+
+
+
+
+

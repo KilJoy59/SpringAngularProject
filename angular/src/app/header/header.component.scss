@@ -1,0 +1,33 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover, a:active {
+  color: red;
+}
+
+.navigation-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+mat-toolbar {
+  border-radius: 3px;
+}
+
+@media(max-width: 959px) {
+  mat-toolbar {
+    border-radius: 0px;
+  }
+}
+
+.mat-toolbar.mat-primary {
+  background: #273370;
+  color: #fff;
+}
+
+.material-icons {
+  font-size: 55px;
+}

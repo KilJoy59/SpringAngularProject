@@ -1,0 +1,34 @@
+<mat-nav-list>
+  <a mat-list-item routerLink="#" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Главное меню</span>
+  </a>
+  <a mat-list-item routerLink="/student" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Студенты</span>
+  </a>
+  <a mat-list-item routerLink="/teacher" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Преподаватели</span>
+  </a>
+  <a mat-list-item routerLink="/course" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Курсы</span>
+  </a>
+  <a mat-list-item routerLink="/lesson" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Уроки</span>
+  </a>
+  <a mat-list-item routerLink="/room" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Аудитории</span>
+  </a>
+  <a mat-list-item routerLink="/instrument" (click)="onSidenavClose()">
+    <mat-icon>navigate_next</mat-icon>
+    <span class="nav-caption">Инструменты</span>
+  </a>
+
+  <button mat-stroked-button *ngIf="!router.url.endsWith('/login')" (click)="onClick()">
+    Выйти
+  </button>
+</mat-nav-list>

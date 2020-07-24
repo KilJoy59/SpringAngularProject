@@ -1,0 +1,57 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      Ожидание
+    </div>
+  </div>
+
+  <h2>Аудитории</h2>
+  <div class="table-container">
+
+    <table mat-table [dataSource]="data" class="example-table"
+           matSort matSortActive="idd" matSortDisableClear matSortDirection="asc">
+      <!-- Number Column -->
+      <ng-container matColumnDef="idd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>#</th>
+        <td mat-cell *matCellDef="let row">{{row.idd}}</td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Номер аудитория</th>
+        <td mat-cell *matCellDef="let row">{{row.number}}</td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="block">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Корпус</th>
+        <td mat-cell *matCellDef="let row">{{row.block}}</td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="createDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Дата обновления
+        </th>
+        <td mat-cell *matCellDef="let row">{{row.createDate}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="view">
+        <th mat-header-cell  *matHeaderCellDef >
+          <button mat-raised-button color="primary" (click)="openCreateDialog()" > Создать </button>
+          <mat-cell *matCellDef="let row" >
+            <button mat-raised-button color="primary" (click)="openEditDialog(row.idd)" >Просмотр</button>
+          </mat-cell>
+        </th>
+        <td mat-cell *matCellDef="let row">{{row.idd}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="sizeOption" [pageSize]="5"></mat-paginator>
+</div>

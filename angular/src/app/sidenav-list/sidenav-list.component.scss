@@ -1,0 +1,21 @@
+
+a {
+  text-decoration: none;
+  color: red;
+}
+
+a:hover, a:active {
+  color: lightgray;
+}
+
+.nav-caption {
+  display: inline-block;
+  padding-left: 30px;
+}
+
+.mat-drawer-inner-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "salt",
+      "type": "java.lang.String",
+      "description": "Salt for passwords."
+    }
+  ] }
