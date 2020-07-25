@@ -114,7 +114,7 @@
                     <version>3.10.0</version>
                     <configuration>
                         <defaultSchemaName>public</defaultSchemaName>
-                        <changeLogFile>${basedir}/db/master.xml</changeLogFile>
+                        <changeLogFile>db/master.xml</changeLogFile>
                         <!--                    <outputChangeLogFile>${basedir}/db/output.xml</outputChangeLogFile>-->
                         <url>${url}</url>
                         <username>${username}</username>

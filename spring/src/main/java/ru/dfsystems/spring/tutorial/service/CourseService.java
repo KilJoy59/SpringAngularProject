@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.dfsystems.spring.tutorial.dao.StudentToCourseDaoImpl;
 import ru.dfsystems.spring.tutorial.dao.course.CourseDaoImpl;
 import ru.dfsystems.spring.tutorial.dao.course.CourseListDao;
+import ru.dfsystems.spring.tutorial.dao.student.StudentDaoImpl;
 import ru.dfsystems.spring.tutorial.dto.BaseListDto;
 import ru.dfsystems.spring.tutorial.dto.course.CourseDto;
 import ru.dfsystems.spring.tutorial.dto.course.CourseHistoryDto;
@@ -23,12 +24,14 @@ import java.util.stream.Collectors;
 public class CourseService extends BaseService<CourseHistoryDto, CourseListDto, CourseDto, CourseParams, Course> {
 
     private StudentToCourseDaoImpl studentToCourseDao;
+    private StudentDaoImpl studentDao;
 
     @Autowired
     public CourseService(MappingService mappingService, CourseListDao courseListDao, CourseDaoImpl courseDao,
-                         StudentToCourseDaoImpl studentToCourseDao) {
+                         StudentToCourseDaoImpl studentToCourseDao, StudentDaoImpl studentDao) {
         super(mappingService, courseListDao, courseDao, CourseListDto.class, CourseDto.class, Course.class);
         this.studentToCourseDao = studentToCourseDao;
+        this.studentDao = studentDao;
     }
 
     public List<LessonListDto> getLessonsByCourseIdd(Integer idd) {
@@ -42,6 +45,13 @@ public class CourseService extends BaseService<CourseHistoryDto, CourseListDto, 
         CourseDto courseDto = super.create(dto);
         mergeStudents(dto.getIdd(), dto.getStudents(), courseDto.getStudents());
         return get(courseDto.getIdd());
+    }
+
+    @Override
+    public CourseDto get(Integer idd) {
+        CourseDto courseDto = super.get(idd);
+
+        return super.get(idd);
     }
 
     @Override

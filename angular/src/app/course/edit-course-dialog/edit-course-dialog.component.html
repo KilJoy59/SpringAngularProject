@@ -48,12 +48,6 @@
   </div>
 
   <div class="table-container" *ngIf="showStudentTable">
-    <button mat-icon-button aria-label="Добавить" (click)="onAddStudent(data.idd)">
-      <mat-icon>add</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="Удалить" [disabled]="selection.selected[0] == null " (click)="onDeleteStudent()">
-      <mat-icon>remove</mat-icon>
-    </button>
     <table mat-table [dataSource]="data.students" class="students-table">
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef></th>

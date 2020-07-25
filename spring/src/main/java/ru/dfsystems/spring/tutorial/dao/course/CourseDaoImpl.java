@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static ru.dfsystems.spring.tutorial.generated.tables.Course.COURSE;
+import static ru.dfsystems.spring.tutorial.generated.tables.Student.STUDENT;
 import static ru.dfsystems.spring.tutorial.generated.tables.StudentToCourse.STUDENT_TO_COURSE;
 import static ru.dfsystems.spring.tutorial.generated.tables.Teacher.TEACHER;
 
@@ -54,6 +55,8 @@ public class CourseDaoImpl extends CourseDao implements BaseDao<Course> {
                 .from(COURSE)
                 .join(STUDENT_TO_COURSE)
                 .on(COURSE.IDD.eq(STUDENT_TO_COURSE.COURSE_IDD))
+                .join(STUDENT)
+                .on(STUDENT_TO_COURSE.STUDENT_IDD.eq(STUDENT.IDD))
                 .where(STUDENT_TO_COURSE.STUDENT_IDD.eq(idd))
                 .fetchInto(Course.class);
     }
@@ -64,4 +67,6 @@ public class CourseDaoImpl extends CourseDao implements BaseDao<Course> {
                 .where(TEACHER.IDD.eq(idd))
                 .fetchInto(Course.class);
     }
+
+
 }
