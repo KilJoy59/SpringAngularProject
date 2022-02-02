@@ -23,7 +23,7 @@
 
     <properties>
         <org.jooq.version>3.13.2</org.jooq.version>
-        <org.postgresql.version>42.2.14</org.postgresql.version>
+        <org.postgresql.version>42.2.25</org.postgresql.version>
         <io.springfox.version>2.10.5</io.springfox.version>
     </properties>
 
